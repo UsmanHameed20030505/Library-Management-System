@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Library Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/add_book">Add Book</a></li>
+		        <li><a href="/edit_book">Edit Book</a></li>
+                <li><a href="/issue_book">Issue Book</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Genre</th>
+                    <th>Publisher</th>
+                    <th>Available Count</th>
+                    <th>Total Count</th>
+                    <th>Issue Status</th>
+                    <th>Borrowed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.available_count }}</td>
+                    <td>{{ book.total_count }}</td>
+                    <td>{{ "Issued" if book.issue_status else "Available" }}</td>
+                    <td>{{ book.borrowed_by }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
+
+
