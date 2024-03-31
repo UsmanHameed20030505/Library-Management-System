@@ -27,10 +27,7 @@
                     <th>Title</th>
                     <th>Author</th>
                     <th>ISBN</th>
-                    <th>Genre</th>
-                    <th>Publisher</th>
                     <th>Available Count</th>
-                    <th>Total Count</th>
                     <th>Issue Status</th>
                     <th>Borrowed By</th>
                 </tr>
@@ -41,12 +38,16 @@
                     <td>{{ book.title }}</td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.isbn }}</td>
-                    <td>{{ book.genre }}</td>
-                    <td>{{ book.publisher }}</td>
                     <td>{{ book.available_count }}</td>
-                    <td>{{ book.total_count }}</td>
-                    <td>{{ "Issued" if book.issue_status else "Available" }}</td>
-                    <td>{{ book.borrowed_by }}</td>
+
+                    <td>{{ "No Copy Available" if book.available_count == 0 else "Available" }}</td>
+
+                    <td>  
+                            {% for borrowing in book.borrowings %}
+                                {{ borrowing.borrower_name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>
